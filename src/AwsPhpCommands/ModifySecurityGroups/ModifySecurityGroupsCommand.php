@@ -69,7 +69,7 @@ class ModifySecurityGroupsCommand extends Command
     protected function configure()
     {
         $this->setName('aws:security-groups:modify')
-            ->setDescription('Adds/removes CIDRs to/from security groups.')
+            ->setDescription('Adds/removes CIDRs to security groups.')
             ->addOption(
                 'cidr',
                 'c',
