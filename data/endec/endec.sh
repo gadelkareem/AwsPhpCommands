@@ -2,7 +2,7 @@
 #################################
 # `endec` - encrypt/decrypt tool
 # author - Daniel a.k.a ViruSzZ
-# url: https://d.stavrovski.net
+# url: https://stavrovski.net/blog/tool-to-easily-encrypt-decrypt-your-data-under-gnulinux
 #################################
 
 #######################
