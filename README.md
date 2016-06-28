@@ -2,6 +2,7 @@
 A group of AWS Cli commands for devOps
 
 ## [Service Discovery Command](http://gadelkareem.com/2016/06/28/aws-php-service-discovery/)
+
 [Service Discovery](https://github.com/gadelkareem/AwsPhpCommands/blob/master/src/AwsPhpCommands/ServiceDiscovery/ServiceDiscoveryCommand.php "Service Discovery") is a simple PHP command to collect and store AWS information such as [EC2s](https://aws.amazon.com/ec2/) and [RDSs](https://aws.amazon.com/rds/) in the current [region](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) and save them with their credentials into an encrypted JSON file on [S3](https://aws.amazon.com/s3/). The script later notifies each service via SSH and executes the service discovery client on each instance. Each client downloads the JSON file and uses it to configure different applications. It can easily be automated through [Rundeck](http://rundeck.org/) or [Jenkins](https://jenkins.io/) to be executed after each deploy. Service Discovery is part of [AWS PHP Commands](https://github.com/gadelkareem/AwsPhpCommands). Usage:
 
 ```
@@ -160,4 +161,31 @@ Help:
 
 ###For support please visit [AWS PHP Service Discovery](http://gadelkareem.com/2016/06/28/aws-php-service-discovery/)
 
+## [AWS PHP Modify Security Groups Command](http://gadelkareem.com/2016/06/26/aws-php-modify-security-groups-command/)
 
+[Modify Security Groups Command](https://github.com/gadelkareem/AwsPhpCommands/blob/master/src/AwsPhpCommands/ModifySecurityGroups/ModifySecurityGroupsCommand.php "Modify Security Groups Command") is an easy to use command that you can add to your DevOps to allow adding/Removing IPs or CIDRs to [AWS security groups](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) for all protocol and ports. The command is part of [AWS PHP Commands](https://github.com/gadelkareem/AwsPhpCommands). 
+
+#### Usage:
+
+```
+> php console.php aws:security-groups:modify -h
+Usage:
+  aws:security-groups:modify [options]
+
+Options:
+  -c, --cidr=CIDR            CIDR ex: 64.18.0.0/20 [default: false]
+  -o, --operation=OPERATION  Operation to perform, one of add or remove [default: "add"]
+  -e, --env[=ENV]            Which security groups this should run on. One of prod, dev [default: "dev"]
+  -h, --help                 Display this help message
+  -q, --quiet                Do not output any message
+  -V, --version              Display this application version
+      --ansi                 Force ANSI output
+      --no-ansi              Disable ANSI output
+  -n, --no-interaction       Do not ask any interactive question
+  -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+ Adds/removes CIDRs to security groups.
+```
+
+###For support please visit [AWS PHP Modify Security Groups Command Page](http://gadelkareem.com/2016/06/26/aws-php-modify-security-groups-command/)
