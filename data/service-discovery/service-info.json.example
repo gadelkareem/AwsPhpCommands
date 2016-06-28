@@ -1,0 +1,97 @@
+{
+  "servicesInfo": {
+    "ec2s": {
+      "instance-name-prod": [
+        {
+          "id": "i-62882e2f",
+          "name": "instance-name-prod",
+          "keyName": "key-example",
+          "publicIp": "74.125.224.72",
+          "privateIp": "172.31.5.119",
+          "securityGroup": "group_prod",
+          "vpcId": "vpc-cd4x23ef",
+          "tags": {
+            "Name": "instance-name-prod"
+          },
+          "credentials": {
+            "someService": {
+              "username": "user_prod",
+              "password": "prod_pass"
+            }
+          }
+        }
+      ]
+    },
+    "rdss": {
+      "rds-name-prod": {
+        "id": "rds-name-prod",
+        "name": "rds-name-prod",
+        "endpoint": "rds-name-prod.dfgadfg4df.us-west-1.rds.amazonaws.com",
+        "securityGroup": "sg-2b2c86fd",
+        "port": 3306,
+        "credentials": {
+          "dbOne": {
+            "username": "user_prod",
+            "dbName": "db_prod",
+            "password": "prod_pass"
+          },
+          "dbTwo": {
+            "username": "user_prod",
+            "dbName": "db_prod",
+            "password": "prod_pass"
+          }
+        }
+      }
+    },
+    "servicesCredentials": {
+      "instance-name-prod": {
+        "someService": {
+          "username": "user_prod",
+          "password": "prod_pass"
+        }
+      },
+      "instance-name-dev": {
+        "someService": {
+          "username": "user_dev",
+          "password": "dev_pass"
+        }
+      },
+      "rds-name-prod": {
+        "dbOne": {
+          "username": "user_prod",
+          "dbName": "db_prod",
+          "password": "prod_pass"
+        },
+        "dbTwo": {
+          "username": "user_prod",
+          "dbName": "db_prod",
+          "password": "prod_pass"
+        }
+      },
+      "rds-name-dev": {
+        "dbOne": {
+          "username": "user_dev",
+          "dbName": "db_dev",
+          "password": "dev_pass"
+        },
+        "dbTwo": {
+          "username": "user_dev",
+          "dbName": "db_dev",
+          "password": "dev_pass"
+        }
+      }
+    },
+    "publicIps": [
+      "74.125.224.72"
+    ],
+    "privateIps": [
+      "172.31.5.119",
+      "172.31.1.10"
+    ],
+    "whiteListCidrs": [
+      "64.18.0.0\/20",
+      "172.31.0.0\/16",
+      "74.125.224.72\/32",
+    ]
+  }
+}

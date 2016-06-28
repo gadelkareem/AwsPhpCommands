@@ -32,15 +32,6 @@ use Symfony\Component\Process\Process;
 class ServiceDiscoveryCommand extends Command
 {
 
-    /**
-     *  List of internal or trusted IPs
-     *
-     * @var array
-     */
-    static $WHITE_LIST_CIDRS = [
-        '64.18.0.0/20', //Public IPs
-        '172.31.0.0/16', //AWS VPC
-    ];
 
     /**
      *  List of private key names with their corresponding login username
@@ -50,6 +41,23 @@ class ServiceDiscoveryCommand extends Command
      */
     static $KEYNAME_LOGINS = [
         'key-example' => 'ubuntu',
+    ];
+
+    /**
+     * S3 bucket name
+     *
+     * @var string
+     */
+    const S3_BUCKET = 'services.store';
+
+    /**
+     *  List of internal or trusted IPs
+     *
+     * @var array
+     */
+    static $WHITE_LIST_CIDRS = [
+        '64.18.0.0/20', //Public IPs
+        '172.31.0.0/16', //AWS VPC
     ];
 
     /**
@@ -208,6 +216,7 @@ class ServiceDiscoveryCommand extends Command
         if (!getenv('AWS_ACCESS_KEY_ID') || !getenv('AWS_SECRET_ACCESS_KEY')) {
             throw new \InvalidArgumentException("No AWS keys found! Please add your AWS keys to your environment variables.");
         }
+        
 
         if (!getenv('DEV_ENC_PASS') || !getenv('PROD_ENC_PASS')) {
             throw new \InvalidArgumentException("Encryption passwords were not found! Please add 'DEV_ENC_PASS' and 'PROD_ENC_PASS' to your environment variables.");
@@ -471,7 +480,7 @@ class ServiceDiscoveryCommand extends Command
      */
     private function uploadToS3($envType)
     {
-        $bucket = 'services.store';
+        $bucket = self::S3_BUCKET;
 
         $this->output->writeln("- Uploading to S3...");
         $this->s3Client->putObject([
