@@ -1,4 +1,4 @@
-# AWS PHP Commands
+# [AWS PHP Commands](https://github.com/gadelkareem/AwsPhpCommands)
 A group of AWS Cli commands for devOps
 
 ## [Service Discovery Command](http://gadelkareem.com/2016/06/28/aws-php-service-discovery/)
