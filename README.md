@@ -1,6 +1,14 @@
 # [AWS PHP Commands](https://github.com/gadelkareem/AwsPhpCommands)
 A group of AWS Cli commands for devOps
 
+###Installation
+```
+git clone https://github.com/gadelkareem/AwsPhpCommands.git
+cd AwsPhpCommands/
+composer update
+```
+
+
 ## [Service Discovery Command](http://gadelkareem.com/2016/06/28/aws-php-service-discovery/)
 
 [Service Discovery](https://github.com/gadelkareem/AwsPhpCommands/blob/master/src/AwsPhpCommands/ServiceDiscovery/ServiceDiscoveryCommand.php "Service Discovery") is a simple PHP command to collect and store AWS information such as [EC2s](https://aws.amazon.com/ec2/) and [RDSs](https://aws.amazon.com/rds/) in the current [region](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) and save them with their credentials into an encrypted JSON file on [S3](https://aws.amazon.com/s3/). The script later notifies each service via SSH and executes the service discovery client on each instance. Each client downloads the JSON file and uses it to configure different applications. It can easily be automated through [Rundeck](http://rundeck.org/) or [Jenkins](https://jenkins.io/) to be executed after each deploy. Service Discovery is part of [AWS PHP Commands](https://github.com/gadelkareem/AwsPhpCommands). 
