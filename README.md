@@ -1,7 +1,7 @@
 # [AWS PHP Commands](https://github.com/gadelkareem/AwsPhpCommands)
 A group of AWS Cli commands for devOps
 
-###Installation
+### Installation
 ```
 git clone https://github.com/gadelkareem/AwsPhpCommands.git
 cd AwsPhpCommands/
@@ -169,7 +169,7 @@ Help:
 }
 ```
 
-###For support please visit [AWS PHP Service Discovery](http://gadelkareem.com/2016/06/28/aws-php-service-discovery/)
+### For support please visit [AWS PHP Service Discovery](http://gadelkareem.com/2016/06/28/aws-php-service-discovery/)
 ___
 
 
@@ -203,4 +203,4 @@ Help:
  Adds/removes CIDRs to security groups.
 ```
 
-###For support please visit [AWS PHP Modify Security Groups Command Page](http://gadelkareem.com/2016/06/26/aws-php-modify-security-groups-command/)
+### For support please visit [AWS PHP Modify Security Groups Command Page](http://gadelkareem.com/2016/06/26/aws-php-modify-security-groups-command/)
