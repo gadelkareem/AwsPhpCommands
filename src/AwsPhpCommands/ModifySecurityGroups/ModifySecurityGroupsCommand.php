@@ -19,12 +19,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class ModifySecurityGroupsCommand
- * @package AwsPhpCommands\ModifySecurityGroups
+ * Class ModifySecurityGroupsCommand.
  */
 class ModifySecurityGroupsCommand extends Command
 {
-
     /**
      * @var Ec2Client
      */
@@ -48,7 +46,7 @@ class ModifySecurityGroupsCommand extends Command
     /**
      * @var array
      */
-    private $envTypes = ["dev", "prod"];
+    private $envTypes = ['dev', 'prod'];
 
     /**
      * @var string
@@ -64,7 +62,6 @@ class ModifySecurityGroupsCommand extends Command
      * @var string
      */
     private $env;
-
 
     protected function configure()
     {
@@ -89,11 +86,10 @@ class ModifySecurityGroupsCommand extends Command
                 'Which security groups this should run on. One of prod, dev',
                 'dev'
             );
-
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     private function setup(InputInterface $input, OutputInterface $output)
@@ -102,31 +98,31 @@ class ModifySecurityGroupsCommand extends Command
         $this->output = $output;
 
         if (!getenv('AWS_ACCESS_KEY_ID') || !getenv('AWS_SECRET_ACCESS_KEY')) {
-            throw new \InvalidArgumentException("No AWS keys found! please add your AWS keys to your environment variables.");
+            throw new \InvalidArgumentException('No AWS keys found! please add your AWS keys to your environment variables.');
         }
 
-        if (!preg_match('`([0-9]{1,3}\.){3}[0-9]{1,3}\/32`', $this->input->getOption("cidr"))) {
-            throw new \InvalidArgumentException("Invalid CIDR! please use this format 64.18.0.0/20");
+        if (!preg_match('`([0-9]{1,3}\.){3}[0-9]{1,3}\/32`', $this->input->getOption('cidr'))) {
+            throw new \InvalidArgumentException('Invalid CIDR! please use this format 64.18.0.0/20');
         }
-        $this->cidr = $this->input->getOption("cidr");
+        $this->cidr = $this->input->getOption('cidr');
 
-        if (!in_array($this->input->getOption("operation"), ['add', 'remove'])) {
-            throw new \InvalidArgumentException("Invalid operation. Please use one of add or remove");
+        if (!in_array($this->input->getOption('operation'), ['add', 'remove'])) {
+            throw new \InvalidArgumentException('Invalid operation. Please use one of add or remove');
         }
-        $this->operation = $this->input->getOption("operation");
+        $this->operation = $this->input->getOption('operation');
 
-        if (!in_array($this->input->getOption("env"), $this->envTypes)) {
-            throw new \InvalidArgumentException("Invalid env. Please use one of " .
+        if (!in_array($this->input->getOption('env'), $this->envTypes)) {
+            throw new \InvalidArgumentException('Invalid env. Please use one of '.
                 implode(',', $this->envTypes)
             );
         }
-        $this->env = $this->input->getOption("env");
+        $this->env = $this->input->getOption('env');
 
         $config = [
-            'version' => '2015-10-01',
-            'region' => 'eu-west-1',
+            'version'     => '2015-10-01',
+            'region'      => 'eu-west-1',
             'credentials' => [
-                'key' => getenv('AWS_ACCESS_KEY_ID'),
+                'key'    => getenv('AWS_ACCESS_KEY_ID'),
                 'secret' => getenv('AWS_SECRET_ACCESS_KEY'),
             ],
             'retries' => 0,
@@ -134,9 +130,8 @@ class ModifySecurityGroupsCommand extends Command
         $this->awsClient = new Ec2Client($config);
     }
 
-
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -145,16 +140,16 @@ class ModifySecurityGroupsCommand extends Command
         $this->getSecurityGroups();
 
         foreach ($this->securityGroups as $id => $name) {
-            if (strstr($name, "prod") !== false && $this->env == 'dev') {
+            if (strstr($name, 'prod') !== false && $this->env == 'dev') {
                 continue;
             }
             $args = [
-                'GroupName' => $name,
-                'GroupId' => $id,
+                'GroupName'     => $name,
+                'GroupId'       => $id,
                 'IpPermissions' => [
                     [
                         'IpProtocol' => '-1',
-                        'IpRanges' => [['CidrIp' => $this->cidr]],
+                        'IpRanges'   => [['CidrIp' => $this->cidr]],
                     ],
                 ],
             ];
@@ -166,9 +161,8 @@ class ModifySecurityGroupsCommand extends Command
             $this->output->writeln("- Rule {$this->operation}ed - {$name}.");
             sleep(2);
         }
-        $this->output->writeln("- Found " . count($this->securityGroups) . " Security Groups.");
+        $this->output->writeln('- Found '.count($this->securityGroups).' Security Groups.');
     }
-
 
     /**
      * @return array
@@ -180,6 +174,7 @@ class ModifySecurityGroupsCommand extends Command
         foreach ($securityGroups['SecurityGroups'] as $securityGroup) {
             $this->securityGroups[$securityGroup['GroupId']] = $securityGroup['GroupName'];
         }
+
         return $this->securityGroups;
     }
 
@@ -192,9 +187,8 @@ class ModifySecurityGroupsCommand extends Command
             $this->awsClient->authorizeSecurityGroupIngress($args);
             $this->awsClient->authorizeSecurityGroupEgress($args);
         } catch (Ec2Exception $e) {
-            $this->output->writeln("- " . $e->getMessage());
+            $this->output->writeln('- '.$e->getMessage());
         }
-
     }
 
     /**
@@ -206,9 +200,7 @@ class ModifySecurityGroupsCommand extends Command
             $this->awsClient->revokeSecurityGroupIngress($args);
             $this->awsClient->revokeSecurityGroupEgress($args);
         } catch (Ec2Exception $e) {
-            $this->output->writeln("- " . $e->getMessage());
+            $this->output->writeln('- '.$e->getMessage());
         }
     }
-
-
 }
